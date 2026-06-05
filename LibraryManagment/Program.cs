@@ -17,6 +17,8 @@ namespace LibraryManagment
             int menuOption = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter username:");
             string? userName = Console.ReadLine();
+            Console.WriteLine("Enter valid username");
+            userName = Console.ReadLine();
             InitilizeMenu(userName, menuOption);
         }
         public static void InitilizeMenu(string? userName, int menuOption)
@@ -47,8 +49,23 @@ namespace LibraryManagment
             ==========================";
             if (menuOption == 1)
             {
+                Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
-                int? librerianMenuOption = Convert.ToInt32(Console.ReadLine());
+                bool programIsRunning = true;
+                while (programIsRunning)
+                {
+                    int librarianMenuOption = Convert.ToInt32(Console.ReadLine());
+                    switch (librarianMenuOption)
+                    {
+                        case 1:
+                            librarian.AddNewItem();
+                            Console.WriteLine(librarianMenu);
+                            break;
+                        case 6:
+                            programIsRunning = false;
+                            break;
+                    }
+                }
             }
             else
             {
