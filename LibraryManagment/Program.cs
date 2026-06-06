@@ -17,8 +17,11 @@ namespace LibraryManagment
             int menuOption = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter username:");
             string? userName = Console.ReadLine();
-            Console.WriteLine("Enter valid username");
-            userName = Console.ReadLine();
+            while (userName == "")
+            {
+                Console.WriteLine("Enter valid username");
+                userName = Console.ReadLine();
+            }
             InitilizeMenu(userName, menuOption);
         }
         public static void InitilizeMenu(string? userName, int menuOption)
