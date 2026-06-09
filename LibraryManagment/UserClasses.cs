@@ -20,7 +20,7 @@ namespace LibraryManagment
         }
         class Librarian : User
         {
-            public void AddNewItem()
+            public LibraryItem CreateNewItem()
             {
                 try
                 {
@@ -31,10 +31,13 @@ namespace LibraryManagment
                     Console.WriteLine("Enter Author");
                     string? author = Console.ReadLine();
                     LibraryItem libraryItem = new LibraryItem(title, publicationYear, author);
+                    return libraryItem;
                 }
                 catch
                 {
                     Console.WriteLine("Enter valid input");
+                    LibraryItem libraryItem = new LibraryItem("failed");
+                    return libraryItem;
                 }
 
             }

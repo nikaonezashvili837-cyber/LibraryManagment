@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text.Json;
+
 namespace LibraryManagment
 {
     partial class Program
@@ -55,13 +57,19 @@ namespace LibraryManagment
                 Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
                 bool programIsRunning = true;
+                List<LibraryItem> libraryItems = new List<LibraryItem>();
                 while (programIsRunning)
                 {
                     int librarianMenuOption = Convert.ToInt32(Console.ReadLine());
                     switch (librarianMenuOption)
                     {
                         case 1:
-                            librarian.AddNewItem();
+                            LibraryItem libraryItem = librarian.CreateNewItem();
+                            if (libraryItem.Title != "failed")
+                            {
+                                libraryItems.Add(libraryItem);
+                            }
+                            WriteNewItem(libraryItems);
                             Console.WriteLine(librarianMenu);
                             break;
                         case 6:
@@ -75,6 +83,14 @@ namespace LibraryManagment
                 Console.WriteLine(memberMenu);
                 int? memberMenuOption = Convert.ToInt32(Console.ReadLine());
             }
+        }
+        public static void WriteNewItem(List<LibraryItem> libraryItems)
+        {
+            var json = JsonSerializer.Serialize(libraryItems, new JsonSerializerOptions
+            {
+                WriteIndented = true,
+            });
+            File.WriteAllText("LibraryItems.json", json);
         }
     }
 

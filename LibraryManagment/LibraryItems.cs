@@ -2,7 +2,7 @@ namespace LibraryManagment
 {
     partial class Program
     {
-        class LibraryItem
+        public class LibraryItem
         {
             public string? Title {get;set;}
             public int PublicationYear {get;set;}
@@ -12,6 +12,10 @@ namespace LibraryManagment
                 Title = title;
                 PublicationYear = publicationyear;
                 Author = author; 
+            }
+            public LibraryItem(string title)
+            {
+                Title = title;
             }
         }
     }
