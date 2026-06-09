@@ -24,9 +24,10 @@ namespace LibraryManagment
                 Console.WriteLine("Enter valid username");
                 userName = Console.ReadLine();
             }
-            InitilizeMenu(userName, menuOption);
+            InitilizeMenu(userName);
+            ActivateUserOptions(menuOption);
         }
-        public static void InitilizeMenu(string? userName, int menuOption)
+        public static void InitilizeMenu(string? userName)
         {
             User user = new User(userName);
             Console.WriteLine($@"
@@ -34,7 +35,9 @@ namespace LibraryManagment
             ==========================
             {user.WelcomeMessage()}
             ==========================");
-            string librarianMenu = @"
+        }
+        public static void ActivateUserOptions(int menuOption){
+          string librarianMenu = @"
             ===== LIBRARIAN MENU =====
             1. Add a new item
             2. Remove an item
@@ -51,8 +54,8 @@ namespace LibraryManagment
             4. Return an item
             5. View my borrowed items
             6. Exit
-            ==========================";
-            if (menuOption == 1)
+            ==========================";  
+              if (menuOption == 1)
             {
                 Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
