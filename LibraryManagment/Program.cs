@@ -60,7 +60,13 @@ namespace LibraryManagment
                 Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
                 bool programIsRunning = true;
-                List<LibraryItem> libraryItems = new List<LibraryItem>();
+                List<LibraryItem>? libraryItems =  new List<LibraryItem>();;
+                string jsonContent = File.ReadAllText("LibraryItems.json");
+                List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
+                if(jsonContent != "")
+                {
+                    libraryItems = jsonArray;
+                }
                 while (programIsRunning)
                 {
                     int librarianMenuOption = Convert.ToInt32(Console.ReadLine());
@@ -68,11 +74,14 @@ namespace LibraryManagment
                     {
                         case 1:
                             LibraryItem libraryItem = librarian.CreateNewItem();
-                            if (libraryItem.Title != "failed")
+                            if (libraryItem.Title != "failed" && libraryItems != null)
                             {
                                 libraryItems.Add(libraryItem);
                             }
-                            WriteNewItem(libraryItems);
+                            if(libraryItems != null)
+                            {
+                                WriteNewItem(libraryItems);
+                            }
                             Console.WriteLine(librarianMenu);
                             break;
                         case 6:

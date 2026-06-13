@@ -7,6 +7,10 @@ namespace LibraryManagment
             public string? Title {get;set;}
             public int PublicationYear {get;set;}
             public string? Author{get;set;}
+            public LibraryItem()
+            {
+                
+            }
             public LibraryItem(string? title,int publicationyear,string? author)
             {
                 Title = title;
