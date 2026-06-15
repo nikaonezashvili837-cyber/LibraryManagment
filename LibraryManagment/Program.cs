@@ -36,8 +36,9 @@ namespace LibraryManagment
             {user.WelcomeMessage()}
             ==========================");
         }
-        public static void ActivateUserOptions(int menuOption){
-          string librarianMenu = @"
+        public static void ActivateUserOptions(int menuOption)
+        {
+            string librarianMenu = @"
             ===== LIBRARIAN MENU =====
             1. Add a new item
             2. Remove an item
@@ -54,16 +55,16 @@ namespace LibraryManagment
             4. Return an item
             5. View my borrowed items
             6. Exit
-            ==========================";  
-              if (menuOption == 1)
+            ==========================";
+            if (menuOption == 1)
             {
                 Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
                 bool programIsRunning = true;
-                List<LibraryItem>? libraryItems =  new List<LibraryItem>();;
+                List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
                 string jsonContent = File.ReadAllText("LibraryItems.json");
                 List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
-                if(jsonContent != "")
+                if (jsonContent != "")
                 {
                     libraryItems = jsonArray;
                 }
@@ -74,11 +75,11 @@ namespace LibraryManagment
                     {
                         case 1:
                             LibraryItem libraryItem = librarian.CreateNewItem();
-                            if (libraryItem.Title != "failed" && libraryItems != null)
+                            if (libraryItem.Title != "failed" && libraryItems != null && !CheckDublicates(libraryItems, libraryItem))
                             {
                                 libraryItems.Add(libraryItem);
                             }
-                            if(libraryItems != null)
+                            if (libraryItems != null)
                             {
                                 WriteNewItem(libraryItems);
                             }
@@ -103,6 +104,17 @@ namespace LibraryManagment
                 WriteIndented = true,
             });
             File.WriteAllText("LibraryItems.json", json);
+        }
+        public static bool CheckDublicates(List<LibraryItem> libraryItems, LibraryItem libraryItem)
+        {
+            foreach (LibraryItem item in libraryItems)
+            {
+                if (item.Author == libraryItem.Author && item.Title == libraryItem.Title && item.PublicationYear == libraryItem.PublicationYear)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
