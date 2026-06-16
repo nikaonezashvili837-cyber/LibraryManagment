@@ -1,5 +1,6 @@
 ﻿
 
+using System.Security.Authentication;
 using System.Text.Json;
 
 namespace LibraryManagment
@@ -86,6 +87,11 @@ namespace LibraryManagment
                             Console.WriteLine(librarianMenu);
                             break;
                         case 2:
+                            Console.WriteLine("Enter book title to remove:");
+                            string? bookToRemove = Console.ReadLine();
+                            RemoveItem(bookToRemove);
+                            Console.WriteLine(librarianMenu);
+                            break;
                         case 6:
                             programIsRunning = false;
                             break;
