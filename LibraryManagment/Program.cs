@@ -85,6 +85,7 @@ namespace LibraryManagment
                             }
                             Console.WriteLine(librarianMenu);
                             break;
+                        case 2:
                         case 6:
                             programIsRunning = false;
                             break;
@@ -97,25 +98,5 @@ namespace LibraryManagment
                 int? memberMenuOption = Convert.ToInt32(Console.ReadLine());
             }
         }
-        public static void WriteNewItem(List<LibraryItem> libraryItems)
-        {
-            var json = JsonSerializer.Serialize(libraryItems, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-            });
-            File.WriteAllText("LibraryItems.json", json);
-        }
-        public static bool CheckDublicates(List<LibraryItem> libraryItems, LibraryItem libraryItem)
-        {
-            foreach (LibraryItem item in libraryItems)
-            {
-                if (item.Author == libraryItem.Author && item.Title == libraryItem.Title && item.PublicationYear == libraryItem.PublicationYear)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
-
 }
