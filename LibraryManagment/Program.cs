@@ -63,9 +63,9 @@ namespace LibraryManagment
                 bool programIsRunning = true;
                 List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
                 string jsonContent = File.ReadAllText("LibraryItems.json");
-                List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
                 if (jsonContent != "")
                 {
+                    List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
                     libraryItems = jsonArray;
                 }
                 while (programIsRunning)
