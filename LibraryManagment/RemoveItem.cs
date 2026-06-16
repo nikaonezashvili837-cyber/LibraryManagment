@@ -11,19 +11,12 @@ namespace LibraryManagment
                 Console.WriteLine("Library is empty");
                 return;
             }
-            List<LibraryItem> UpdatedList = new List<LibraryItem>();
             List<LibraryItem>? libraryItems = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
             if (libraryItems != null)
             {
-                foreach (LibraryItem item in libraryItems)
-                {
-                    if (item.Title != bookToRemove)
-                    {
-                        UpdatedList.Add(item);
-                    }
-                }
+                libraryItems.Remove(libraryItems.First(el => el.Title == bookToRemove));
+                WriteNewItem(libraryItems);
             }
-            WriteNewItem(UpdatedList);
             return;
         }
     }
