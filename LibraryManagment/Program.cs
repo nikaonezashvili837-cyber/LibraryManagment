@@ -62,19 +62,14 @@ namespace LibraryManagment
                 Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
                 bool programIsRunning = true;
-                List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
-                string jsonContent = File.ReadAllText("LibraryItems.json");
-                if (jsonContent != "")
-                {
-                    List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
-                    libraryItems = jsonArray;
-                }
                 while (programIsRunning)
                 {
                     int librarianMenuOption = Convert.ToInt32(Console.ReadLine());
                     switch (librarianMenuOption)
                     {
+
                         case 1:
+                            List<LibraryItem>? libraryItems = ExtractListItems();
                             LibraryItem libraryItem = librarian.CreateNewItem();
                             if (libraryItem.Title != "failed" && libraryItems != null && !CheckDublicates(libraryItems, libraryItem))
                             {
@@ -103,6 +98,17 @@ namespace LibraryManagment
                 Console.WriteLine(memberMenu);
                 int? memberMenuOption = Convert.ToInt32(Console.ReadLine());
             }
+        }
+        public static List<LibraryItem>? ExtractListItems()
+        {
+            List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
+            string jsonContent = File.ReadAllText("LibraryItems.json");
+            if (jsonContent != "")
+            {
+                List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
+                libraryItems = jsonArray;
+            }
+            return libraryItems;
         }
     }
 }

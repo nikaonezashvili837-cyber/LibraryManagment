@@ -1,6 +1,7 @@
 using System.Text.Json;
 namespace LibraryManagment
 {
+    //please fix the bug in particular after user tries to add item to json post deletion deleted item returns
     partial class Program
     {
         public static void RemoveItem(string? bookToRemove)
@@ -14,8 +15,15 @@ namespace LibraryManagment
             List<LibraryItem>? libraryItems = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
             if (libraryItems != null)
             {
-                libraryItems.Remove(libraryItems.First(el => el.Title == bookToRemove));
-                WriteNewItem(libraryItems);
+                try
+                {
+                    libraryItems.Remove(libraryItems.First(el => el.Title == bookToRemove));
+                    WriteNewItem(libraryItems);
+                }
+                catch
+                {
+                    Console.WriteLine("no such book in the library");
+                }
             }
             return;
         }
