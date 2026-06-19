@@ -1,5 +1,6 @@
 ﻿
 
+using System.Security.Authentication;
 using System.Text.Json;
 
 namespace LibraryManagment
@@ -61,19 +62,14 @@ namespace LibraryManagment
                 Librarian librarian = new Librarian();
                 Console.WriteLine(librarianMenu);
                 bool programIsRunning = true;
-                List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
-                string jsonContent = File.ReadAllText("LibraryItems.json");
-                if (jsonContent != "")
-                {
-                    List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
-                    libraryItems = jsonArray;
-                }
                 while (programIsRunning)
                 {
                     int librarianMenuOption = Convert.ToInt32(Console.ReadLine());
                     switch (librarianMenuOption)
                     {
+
                         case 1:
+                            List<LibraryItem>? libraryItems = ExtractListItems();
                             LibraryItem libraryItem = librarian.CreateNewItem();
                             if (libraryItem.Title != "failed" && libraryItems != null && !CheckDublicates(libraryItems, libraryItem))
                             {
@@ -83,6 +79,12 @@ namespace LibraryManagment
                             {
                                 WriteNewItem(libraryItems);
                             }
+                            Console.WriteLine(librarianMenu);
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter book title to remove:");
+                            string? bookToRemove = Console.ReadLine();
+                            RemoveItem(bookToRemove);
                             Console.WriteLine(librarianMenu);
                             break;
                         case 6:
@@ -97,25 +99,16 @@ namespace LibraryManagment
                 int? memberMenuOption = Convert.ToInt32(Console.ReadLine());
             }
         }
-        public static void WriteNewItem(List<LibraryItem> libraryItems)
+        public static List<LibraryItem>? ExtractListItems()
         {
-            var json = JsonSerializer.Serialize(libraryItems, new JsonSerializerOptions
+            List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
+            string jsonContent = File.ReadAllText("LibraryItems.json");
+            if (jsonContent != "")
             {
-                WriteIndented = true,
-            });
-            File.WriteAllText("LibraryItems.json", json);
-        }
-        public static bool CheckDublicates(List<LibraryItem> libraryItems, LibraryItem libraryItem)
-        {
-            foreach (LibraryItem item in libraryItems)
-            {
-                if (item.Author == libraryItem.Author && item.Title == libraryItem.Title && item.PublicationYear == libraryItem.PublicationYear)
-                {
-                    return true;
-                }
+                List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
+                libraryItems = jsonArray;
             }
-            return false;
+            return libraryItems;
         }
     }
-
 }
