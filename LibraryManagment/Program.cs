@@ -87,6 +87,9 @@ namespace LibraryManagment
                             RemoveItem(bookToRemove);
                             Console.WriteLine(librarianMenu);
                             break;
+                        case 3:
+                           ViewAllItems();
+                           break;
                         case 6:
                             programIsRunning = false;
                             break;
