@@ -77,7 +77,7 @@ namespace LibraryManagment
                             }
                             if (libraryItems != null)
                             {
-                                WriteNewItem(libraryItems,"LibraryManagment/Program.cs");
+                                WriteNewItem(libraryItems,"LibraryItems.json");
                             }
                             Console.WriteLine(librarianMenu);
                             break;
@@ -91,6 +91,8 @@ namespace LibraryManagment
                             ViewAllItems();
                             break;
                         case 4:
+                            librarian.RegisterNewMember();
+                            Console.WriteLine(librarianMenu);
                             break;
                         case 6:
                             programIsRunning = false;
