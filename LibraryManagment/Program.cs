@@ -69,7 +69,7 @@ namespace LibraryManagment
                     {
 
                         case 1:
-                            List<LibraryItem>? libraryItems = ExtractListItems();
+                            List<LibraryItem>? libraryItems = ExtractListItems<LibraryItem>("LibraryItems.json");
                             LibraryItem libraryItem = librarian.CreateNewItem();
                             if (libraryItem.Title != "failed" && libraryItems != null && !CheckDublicates(libraryItems, libraryItem))
                             {
@@ -88,8 +88,10 @@ namespace LibraryManagment
                             Console.WriteLine(librarianMenu);
                             break;
                         case 3:
-                           ViewAllItems();
-                           break;
+                            ViewAllItems();
+                            break;
+                        case 4:
+                            break;
                         case 6:
                             programIsRunning = false;
                             break;
@@ -102,16 +104,16 @@ namespace LibraryManagment
                 int? memberMenuOption = Convert.ToInt32(Console.ReadLine());
             }
         }
-        public static List<LibraryItem>? ExtractListItems()
+        public static List<T>? ExtractListItems<T>(string filePath)
         {
-            List<LibraryItem>? libraryItems = new List<LibraryItem>(); ;
-            string jsonContent = File.ReadAllText("LibraryItems.json");
+            List<T>? Items = new List<T>(); ;
+            string jsonContent = File.ReadAllText(filePath);
             if (jsonContent != "")
             {
-                List<LibraryItem>? jsonArray = JsonSerializer.Deserialize<List<LibraryItem>>(jsonContent);
-                libraryItems = jsonArray;
+                List<T>? jsonArray = JsonSerializer.Deserialize<List<T>>(jsonContent);
+                Items = jsonArray;
             }
-            return libraryItems;
+            return Items;
         }
     }
 }

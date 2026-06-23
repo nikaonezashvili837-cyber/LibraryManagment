@@ -4,7 +4,7 @@ namespace LibraryManagment
     {
         public static void ViewAllItems()
         {
-            List<LibraryItem>? AllItems = ExtractListItems();
+            List<LibraryItem>? AllItems = ExtractListItems<LibraryItem>("LibraryItems.json");
             int count = 0;
             if (AllItems != null)
             {
