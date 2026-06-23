@@ -77,7 +77,7 @@ namespace LibraryManagment
                             }
                             if (libraryItems != null)
                             {
-                                WriteNewItem(libraryItems);
+                                WriteNewItem(libraryItems,"LibraryManagment/Program.cs");
                             }
                             Console.WriteLine(librarianMenu);
                             break;
