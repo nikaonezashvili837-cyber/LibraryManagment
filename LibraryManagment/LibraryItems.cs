@@ -4,6 +4,7 @@ namespace LibraryManagment
     {
         public class LibraryItem
         {
+            public string? Id {get;set;}
             public string? Title {get;set;}
             public int PublicationYear {get;set;}
             public string? Author{get;set;}
@@ -13,6 +14,7 @@ namespace LibraryManagment
             }
             public LibraryItem(string? title,int publicationyear,string? author)
             {
+                Id = Guid.NewGuid().ToString();
                 Title = title;
                 PublicationYear = publicationyear;
                 Author = author; 

@@ -47,6 +47,7 @@ namespace LibraryManagment
             {
                 public string? Email { get; set; }
                 public DateTime RegistrationDate { get; set; }
+                private List<string> borrowedItems = new List<string>();
                 public LibraryMember(DateTime registrationDate, string? name, string? email = "") : base(name)
                 {
                     Email = email;
