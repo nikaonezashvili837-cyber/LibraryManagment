@@ -1,3 +1,4 @@
+using System.Text.Json;
 namespace LibraryManagment
 {
     partial class Program
@@ -18,6 +19,7 @@ namespace LibraryManagment
                 return "Welcome " + Name;
             }
         }
+
         class Librarian : User
         {
             public LibraryItem CreateNewItem()
@@ -40,6 +42,41 @@ namespace LibraryManagment
                     return libraryItem;
                 }
 
+            }
+            class LibraryMember : User
+            {
+                public string? Email { get; set; }
+                public DateTime RegistrationDate { get; set; }
+                public LibraryMember(DateTime registrationDate, string? name, string? email = "") : base(name)
+                {
+                    Email = email;
+                    RegistrationDate = registrationDate;
+                }
+            }
+            public void RegisterNewMember()
+            {
+                try
+                {
+                    Console.Write("Enter members name: ");
+                    string? name = Console.ReadLine();
+
+                    Console.Write("Enter email: ");
+                    string? email = Console.ReadLine();
+
+                    Console.Write("Enter registration date (yyyy-MM-dd): ");
+                    DateTime RegistrationDate = DateTime.Parse(Console.ReadLine()!);
+                    LibraryMember member = new LibraryMember(RegistrationDate, name, email);
+                    List<LibraryMember>? memberList = ExtractListItems<LibraryMember>("members.json");
+                    if (memberList != null)
+                    {
+                        memberList.Add(member);
+                    }
+                    WriteNewItem(memberList, "members.json");
+                }
+                catch
+                {
+                    Console.WriteLine("enter valid input");
+                }
             }
         }
     }

@@ -18,7 +18,7 @@ namespace LibraryManagment
                 try
                 {
                     libraryItems.Remove(libraryItems.First(el => el.Title == bookToRemove));
-                    WriteNewItem(libraryItems);
+                    WriteNewItem(libraryItems,"LibraryItems.json");
                 }
                 catch
                 {

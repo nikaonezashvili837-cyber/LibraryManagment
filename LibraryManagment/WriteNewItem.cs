@@ -5,13 +5,13 @@ namespace LibraryManagment
 {
     partial class Program
     {
-        public static void WriteNewItem(List<LibraryItem> libraryItems)
+        public static void WriteNewItem<T>(List<T>? Items,string filePath)
         {
-            var json = JsonSerializer.Serialize(libraryItems, new JsonSerializerOptions
+            var json = JsonSerializer.Serialize(Items, new JsonSerializerOptions
             {
                 WriteIndented = true,
             });
-            File.WriteAllText("LibraryItems.json", json);
+            File.WriteAllText(filePath, json);
         }
     }
 }
