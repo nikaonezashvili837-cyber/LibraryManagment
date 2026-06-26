@@ -21,11 +21,13 @@ namespace LibraryManagment
         }
         class LibraryMember : User
         {
+            public string? Id {get;set;}
             public string? Email { get; set; }
             public DateTime RegistrationDate { get; set; }
             private List<BorrowedItem> borrowedItems = new List<BorrowedItem>();
             public LibraryMember(DateTime registrationDate, string? name, string? email = "") : base(name)
             {
+                Id = Guid.NewGuid().ToString();
                 Email = email;
                 RegistrationDate = registrationDate;
             }
