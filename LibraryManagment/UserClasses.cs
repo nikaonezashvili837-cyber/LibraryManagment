@@ -19,6 +19,22 @@ namespace LibraryManagment
                 return "Welcome " + Name;
             }
         }
+        class LibraryMember : User
+        {
+            public string? Email { get; set; }
+            public DateTime RegistrationDate { get; set; }
+            private List<BorrowedItem> borrowedItems = new List<BorrowedItem>();
+            public LibraryMember(DateTime registrationDate, string? name, string? email = "") : base(name)
+            {
+                Email = email;
+                RegistrationDate = registrationDate;
+            }
+            public LibraryMember(string id, string Title)
+            {
+                BorrowedItem Item = new BorrowedItem(id, Title);
+                borrowedItems.Add(Item);
+            }
+        }
 
         class Librarian : User
         {
@@ -42,17 +58,6 @@ namespace LibraryManagment
                     return libraryItem;
                 }
 
-            }
-            class LibraryMember : User
-            {
-                public string? Email { get; set; }
-                public DateTime RegistrationDate { get; set; }
-                private List<string> borrowedItems = new List<string>();
-                public LibraryMember(DateTime registrationDate, string? name, string? email = "") : base(name)
-                {
-                    Email = email;
-                    RegistrationDate = registrationDate;
-                }
             }
             public void RegisterNewMember()
             {

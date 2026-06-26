@@ -2,6 +2,16 @@ namespace LibraryManagment
 {
     partial class Program
     {
+        struct BorrowedItem
+        {
+            public string? Id {get;set;}
+            public string? Title {get;set;}
+            public BorrowedItem(string id, string? title)
+            {
+                Id = id;
+                title = Title;
+            }
+        }
         public class LibraryItem
         {
             public string? Id {get;set;}
